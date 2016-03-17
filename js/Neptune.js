@@ -1,8 +1,9 @@
-var neptune, neptuneCenter, neptuneClouds;
+var neptune, neptuneCenter, neptuneBigSphere;
 
 function initNeptune() {
 
-    var size = 50.4;
+    var size = 0.024552;
+
     var distance = 4495;
 
     //Center for rotation
@@ -11,17 +12,25 @@ function initNeptune() {
     neptuneCenter = new THREE.Mesh(geometry, material);
     scene.add(neptuneCenter);
 
-    //Venus
-    var geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
+    //Neptune
+     geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/neptune/diff.jpg');
 
-    var material = new THREE.MeshPhongMaterial({
+     material = new THREE.MeshPhongMaterial({
         map: diffuse,
         shininess: 0.4
     });
     neptune = new THREE.Mesh(geometry, material);
     neptune.position.set(distance/sizeFactor, 0, 0);
     neptuneCenter.add(neptune);
+
+    //Big sphere
+     var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);
+     material = new THREE.MeshBasicMaterial({
+      color: 0x1c528b
+    });
+  neptuneBigSphere = new THREE.Mesh(bigSphereGeometry, material);
+    neptune.add(neptuneBigSphere);
 }

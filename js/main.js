@@ -17,7 +17,7 @@ var height = window.innerHeight || 2;
 var windowHalfX = width / 2;
 var windowHalfY = height / 2;
 
-var sizeFactor = 5;
+var sizeFactor = 1;
 var speedFactor = 1;
 
 
@@ -29,7 +29,7 @@ function init() {
     container = document.getElementById('container');
 
     //Camera
-    camera = new THREE.PerspectiveCamera(35, windowHalfX / windowHalfY, 1, 5000);
+    camera = new THREE.PerspectiveCamera(35, windowHalfX / windowHalfY, 1, 10000);
 
 
     //Scene
@@ -42,7 +42,7 @@ function init() {
     renderer.autoClear = false;
 
     //Lights
-    var light = new THREE.PointLight(0xffffff, 1);
+    var light = new THREE.PointLight(0xf0f0f0, 1);
     light.position.set(0, 0, 0);
     scene.add(light);
 
@@ -53,17 +53,18 @@ function init() {
     //InitPlanets
     initSun();
     //initStars();
-    //initEarth();
-    //initMars();
-    //initVenus();
-    //initMercury();
-    //initJupiter();
-    //initSaturn();
-    //initUranus();
-    initNeptune();
+    initEarth();
+  initMars();
+   initVenus();
+   initMercury();
+   initJupiter();
+ initSaturn();
+   initUranus();
+  initNeptune();
 
-    camera.position.set(0,3500,0);
-    camera.target = sun.position;
+    camera.position.set(1433+1,2,0);
+//  camera.lookAt = scene.position;
+   camera.target = saturn.position;
 
     //Init Renderpasses
     var renderModel = new THREE.RenderPass(scene, camera);
@@ -109,18 +110,18 @@ function render() {
     uniforms.time.value += 0.2 * delta;
 
     //PlanetRotations
-    sun.rotation.y += 0.025 * delta;
+   sun.rotation.y += 0.025 * delta;
 //earth.rotation.y += 0.4 * delta;
 
 
   //earthCenter.rotation.y -= 0.107 * speedFactor * delta;
-   //marsCenter.rotation.y -= 0.086 * speedFactor * delta;
-   //venusCenter.rotation.y -= 0.126 * speedFactor * delta;
-   //mercuryCenter.rotation.y -= 0.172 * speedFactor * delta;
-   //jupiterCenter.rotation.y -= 0.047 * speedFactor * delta;
-    //saturnCenter.rotation.y -= 0.034 * speedFactor * delta;
-   //uranusCenter.rotation.y -= 0.024 * speedFactor * delta;
-   //neptuneCenter.rotation.y -= 0.019 * speedFactor * delta;
+  // marsCenter.rotation.y -= 0.086 * speedFactor * delta;
+  // venusCenter.rotation.y -= 0.126 * speedFactor * delta;
+  // mercuryCenter.rotation.y -= 0.172 * speedFactor * delta;
+  // jupiterCenter.rotation.y -= 0.047 * speedFactor * delta;
+  //  saturnCenter.rotation.y -= 0.034 * speedFactor * delta;
+//  uranusCenter.rotation.y -= 0.024 * speedFactor * delta;
+  // neptuneCenter.rotation.y -= 0.019 * speedFactor * delta;
 
 
     //CameraPosition = MousePosition

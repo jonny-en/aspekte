@@ -1,4 +1,4 @@
-var uniforms, material, sun;
+var uniforms, material, sun, sunBigSphere;
 
 function initSun() {
     var textureLoader = new THREE.TextureLoader();
@@ -18,7 +18,7 @@ function initSun() {
     uniforms.texture1.value.wrapS = uniforms.texture1.value.wrapT = THREE.RepeatWrapping;
     uniforms.texture2.value.wrapS = uniforms.texture2.value.wrapT = THREE.RepeatWrapping;
 
-    var size = 50.4;
+    var size = 0.696342;
 
     material = new THREE.ShaderMaterial({
 
@@ -30,7 +30,7 @@ function initSun() {
 
     sun = new THREE.Mesh(new THREE.SphereGeometry(size/sizeFactor, 30, 30), material);
     scene.add(sun);
-    
+
 
     //Glow
      var material = new THREE.SpriteMaterial({
@@ -41,6 +41,17 @@ function initSun() {
         blending: THREE.AdditiveBlending
     });
    	var sunGlow = new THREE.Sprite(material);
-   	sunGlow.scale.set(0.8,0.8,0.8)
+   	sunGlow.scale.set(0.8,0.8,0.8);
     sun.add(sunGlow);
+
+    //Big sphere
+     var bigSphereGeometry = new THREE.SphereGeometry(20, 22, 22);
+     material = new THREE.MeshBasicMaterial({
+      color: 0xFFDB99
+    });
+  sunBigSphere = new THREE.Mesh(bigSphereGeometry, material);
+
+    sun.add(sunBigSphere);
+
+
 }

@@ -1,9 +1,9 @@
-var venus, venusCenter, venusClouds;
+var venus, venusCenter, venusBigSphere;
 
 function initVenus() {
 
-    var size = 12103;
-    var distance = 1.08;
+    var size = 0.006056;
+    var distance = 108;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
@@ -12,13 +12,13 @@ function initVenus() {
     scene.add(venusCenter);
 
     //Venus
-    var geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
+     geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/venus/diff.jpg');
     var bump = loader.load('textures/venus/bump.jpg');
 
-    var material = new THREE.MeshPhongMaterial({
+     material = new THREE.MeshPhongMaterial({
         map: diffuse,
         bumpMap: bump,
         bumpScale: 0.01
@@ -26,4 +26,12 @@ function initVenus() {
     venus = new THREE.Mesh(geometry, material);
     venus.position.set(distance/sizeFactor, 0, 0);
     venusCenter.add(venus);
+
+    //Big sphere
+     var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);
+     material = new THREE.MeshBasicMaterial({
+      color: 0xcc714a
+    });
+  venusBigSphere = new THREE.Mesh(bigSphereGeometry, material);
+    venus.add(venusBigSphere);
 }
