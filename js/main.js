@@ -23,14 +23,14 @@ var sizeFactor = 1;
 
 //Access with planet_parameters.mercury_.size
 var planet_parameters = {
-  mercury_ : {size: 0.002439, distance: 58},
-  venus_ : {size: 0.006056, distance: 108},
-  earth_ : {size: 0.006367, distance: 150},
-  mars_ : {size: 0.003386, distance: 228},
-  jupiter_ : {size: 0.0654173, distance: 778},
-  saturn_ : {size: 0.077316, distance: 1433},
-  uranus_ : {size: 0.025266, distance: 2872},
-  neptune_ : {size: 0.024552, distance: 4495},
+  mercury : {size: 0.002439, distance: 58},
+  venus : {size: 0.006056, distance: 108},
+  earth : {size: 0.006367, distance: 150},
+  mars : {size: 0.003386, distance: 228},
+  jupiter : {size: 0.0654173, distance: 778},
+  saturn : {size: 0.077316, distance: 1433},
+  uranus : {size: 0.025266, distance: 2872},
+  neptune : {size: 0.024552, distance: 4495},
 };
 
 init();
@@ -237,12 +237,13 @@ function addBigPlanets() {
     neptune.add(neptuneBigSphere);
 }
 
-$('#mercury').mouseenter(function () {
-  mercuryBigSphere.add(mercuryBigGlow);
-})
-.mouseleave(function () {
-  mercuryBigSphere.remove(mercuryBigGlow);
-});
+function addGlow(planetBigSphere, bigGlow){
+  planetBigSphere.add(bigGlow);
+}
+function removeGlow(planetBigSphere, bigGlow){
+  planetBigSphere.remove(bigGlow);
+}
+
 function flyToPlanet(planet, planetCenter) {
     removeBigPlanets();
     planetCenter.updateMatrixWorld();

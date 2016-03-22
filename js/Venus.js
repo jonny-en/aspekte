@@ -1,9 +1,9 @@
-var venus, venusCenter, venusBigSphere;
+var venus, venusCenter, venusBigSphere, venusBigGlow;
 
 function initVenus() {
 
-    var size = planet_parameters.venus_.size;
-    var distance = planet_parameters.venus_.distance;
+    var size = planet_parameters.venus.size;
+    var distance = planet_parameters.venus.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
@@ -35,7 +35,7 @@ function initVenus() {
         opacity: 0.8,
         blending: THREE.AdditiveBlending
     });
-    var venusBigGlow = new THREE.Sprite(material);
+     venusBigGlow = new THREE.Sprite(material);
     venusBigGlow.scale.set(100,100,100);
 
     //Big sphere
@@ -45,5 +45,4 @@ function initVenus() {
     });
   venusBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     venus.add(venusBigSphere);
-    venusBigSphere.add(venusBigGlow);
 }

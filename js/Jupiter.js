@@ -1,9 +1,9 @@
-var jupiter, jupiterCenter, jupiterBigSphere;
+var jupiter, jupiterCenter, jupiterBigSphere, jupiterBigGlow;
 
 function initJupiter() {
 
-    var size = planet_parameters.jupiter_.size;
-    var distance = planet_parameters.jupiter_.distance;
+    var size = planet_parameters.jupiter.size;
+    var distance = planet_parameters.jupiter.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
@@ -33,7 +33,7 @@ function initJupiter() {
         opacity: 0.8,
         blending: THREE.AdditiveBlending
     });
-    var jupiterBigGlow = new THREE.Sprite(material);
+     jupiterBigGlow = new THREE.Sprite(material);
     jupiterBigGlow.scale.set(100,100,100);
 
     //Big sphere
@@ -43,5 +43,4 @@ function initJupiter() {
     });
   jupiterBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     jupiter.add(jupiterBigSphere);
-    jupiterBigSphere.add(jupiterBigGlow);
 }

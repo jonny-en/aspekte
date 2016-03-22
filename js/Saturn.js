@@ -1,9 +1,9 @@
-var saturn, saturnCenter, saturnBigSphere, saturnRing;
+var saturn, saturnCenter, saturnBigSphere, saturnRing,saturnBigGlow;
 
 function initSaturn() {
 
-    var size = planet_parameters.saturn_.size;
-    var distance = planet_parameters.saturn_.distance;
+    var size = planet_parameters.saturn.size;
+    var distance = planet_parameters.saturn.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
@@ -48,7 +48,7 @@ function initSaturn() {
         opacity: 0.8,
         blending: THREE.AdditiveBlending
     });
-    var saturnBigGlow = new THREE.Sprite(material);
+  saturnBigGlow = new THREE.Sprite(material);
     saturnBigGlow.scale.set(100,100,100);
 
     //Big sphere
@@ -58,5 +58,4 @@ function initSaturn() {
     });
     saturnBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     saturn.add(saturnBigSphere);
-    saturnBigSphere.add(saturnBigGlow);
 }

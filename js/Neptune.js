@@ -1,10 +1,10 @@
-var neptune, neptuneCenter, neptuneBigSphere;
+var neptune, neptuneCenter, neptuneBigSphere,neptuneBigGlow;
 
 function initNeptune() {
 
-    var size = planet_parameters.neptune_.size;
+    var size = planet_parameters.neptune.size;
 
-    var distance = planet_parameters.neptune_.distance;
+    var distance = planet_parameters.neptune.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
@@ -34,7 +34,7 @@ function initNeptune() {
         opacity: 0.8,
         blending: THREE.AdditiveBlending
     });
-    var neptuneBigGlow = new THREE.Sprite(material);
+    neptuneBigGlow = new THREE.Sprite(material);
     neptuneBigGlow.scale.set(100,100,100);
 
     //Big sphere
@@ -44,5 +44,4 @@ function initNeptune() {
     });
   neptuneBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     neptune.add(neptuneBigSphere);
-    neptuneBigSphere.add(neptuneBigGlow);
 }

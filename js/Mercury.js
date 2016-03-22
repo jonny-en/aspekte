@@ -1,9 +1,9 @@
-var mercury, mercuryCenter, mercuryBigSphere;
+var mercury, mercuryCenter, mercuryBigSphere, mercuryBigGlow;
 
 function initMercury() {
 
-    var size = planet_parameters.mercury_.size;
-    var distance = planet_parameters.mercury_.distance;
+    var size = planet_parameters.mercury.size;
+    var distance = planet_parameters.mercury.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
@@ -35,7 +35,7 @@ function initMercury() {
         opacity: 0.8,
         blending: THREE.AdditiveBlending
     });
-    var mercuryBigGlow = new THREE.Sprite(material);
+    mercuryBigGlow = new THREE.Sprite(material);
     mercuryBigGlow.scale.set(100,100,100);
 
 

@@ -1,9 +1,9 @@
-var earth, earthCenter, earthClouds, earthBigSphere;
+var earth, earthCenter, earthClouds, earthBigSphere, earthBigGlow;
 
 function initEarth() {
 
-    var size = planet_parameters.earth_.size;
-    var distance = planet_parameters.earth_.distance;
+    var size = planet_parameters.earth.size;
+    var distance = planet_parameters.earth.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
@@ -47,7 +47,7 @@ function initEarth() {
         opacity: 0.8,
         blending: THREE.AdditiveBlending
     });
-    var earthBigGlow = new THREE.Sprite(material);
+  earthBigGlow = new THREE.Sprite(material);
     earthBigGlow.scale.set(100,100,100);
 
     //Big sphere
@@ -57,5 +57,4 @@ function initEarth() {
     });
   earthBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     earth.add(earthBigSphere);
-    earthBigSphere.add(earthBigGlow);
 }
