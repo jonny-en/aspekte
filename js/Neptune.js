@@ -13,7 +13,7 @@ function initNeptune() {
     mainScene.add(neptuneCenter);
 
     //Neptune
-     geometry = new THREE.SphereGeometry(size, 22, 22);
+     geometry = new THREE.SphereGeometry(size, 60, 60);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/neptune/diff.jpg');
@@ -40,7 +40,7 @@ function initNeptune() {
     neptuneBigGlow.scale.set(100,100,100);
 
     //Big sphere
-     var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);
+     var bigSphereGeometry = new THREE.SphereGeometry(15, 30, 30);
      material = new THREE.MeshBasicMaterial({
       color: 0x1c528b
     });

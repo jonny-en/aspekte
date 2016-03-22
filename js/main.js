@@ -184,31 +184,32 @@ function render() {
         camera.position.x = 100 * Math.sin(phi) * Math.cos(theta);
         camera.position.y = 100 * Math.cos(phi);
         camera.position.z = 100 * Math.sin(phi) * Math.sin(theta);
-
+        camera.lookAt(camera.target);
         marble.visible = false; // *cough*
         innerMarble.visible = false;
         cubeCamera.updateCubeMap(renderer, scene);
         innerMarble.visible = true;
         marble.visible = true; // *cough*
+
     }
     //PlanetRotations
     sun.rotation.y += 0.025 * delta;
-    mars.rotation.x += 0.4 * delta;
+    mars.rotation.y += 0.01 * delta;
 
     if (planets_moving) {
-        earthCenter.rotation.z -= 0.107 * speedFactor * delta;
-        marsCenter.rotation.z -= 0.086 * speedFactor * delta;
-        venusCenter.rotation.z -= 0.126 * speedFactor * delta;
-        mercuryCenter.rotation.z -= 0.172 * speedFactor * delta;
-        jupiterCenter.rotation.z -= 0.047 * speedFactor * delta;
-        saturnCenter.rotation.z -= 0.034 * speedFactor * delta;
-        uranusCenter.rotation.z -= 0.024 * speedFactor * delta;
-        neptuneCenter.rotation.z -= 0.019 * speedFactor * delta;
+        earthCenter.rotation.y -= 0.107 * speedFactor * delta;
+        marsCenter.rotation.y -= 0.086 * speedFactor * delta;
+        venusCenter.rotation.y -= 0.126 * speedFactor * delta;
+        mercuryCenter.rotation.y -= 0.172 * speedFactor * delta;
+        jupiterCenter.rotation.y -= 0.047 * speedFactor * delta;
+        saturnCenter.rotation.y -= 0.034 * speedFactor * delta;
+        uranusCenter.rotation.y -= 0.024 * speedFactor * delta;
+        neptuneCenter.rotation.y -= 0.019 * speedFactor * delta;
     }
 
 
     //CameraPosition via mouse position
-    camera.lookAt(camera.target);
+    // camera.lookAt(camera.target);
     camera.updateProjectionMatrix();
     renderer.clear();
     composer.render(0.01);
@@ -251,25 +252,36 @@ function removeGlow(planetBigSphere, bigGlow) {
 }
 
 function flyToPlanet(planet, planetCenter) {
-    removeBigPlanets();
+
     planets_moving = false;
+    removeBigPlanets();
     planetCenter.updateMatrixWorld();
     mainScene.updateMatrixWorld();
     planet.updateMatrixWorld();
     var vector = new THREE.Vector3();
     vector.setFromMatrixPosition(planet.matrixWorld);
 
+
+
     var tween = new TWEEN.Tween(camera.position).to({
-            x: vector.x + 0.01,
-            y: vector.y + 0.01,
-            z: vector.z + 0.01
+            x: vector.x * 0.9999,
+            y: vector.y * 0.9999,
+            z: vector.z * 0.9999
         }, 7000)
         .easing(TWEEN.Easing.Quintic.InOut)
         .onComplete(function() {
-            $('#information_container').load('content/information.html');
-            $('#values').load('content/mars.html');
+            THREE.SceneUtils.attach(camera, scene, planetCenter);
+
+            $('#information_container').load('content/mars.html');
+            planets_moving = true;
+            console.log(camera.rotation);
         })
-        .start();
+        .onUpdate(function() {
+            camera.lookAt(camera.target);
+        })
+        .onStart(function(){
+               THREE.SceneUtils.detach(camera, planetCenter, scene);
+        }).start();
 
     var tweenTarget = new TWEEN.Tween(camera.target).to({
             x: vector.x,
@@ -277,7 +289,13 @@ function flyToPlanet(planet, planetCenter) {
             z: vector.z
         }, 6000)
         .easing(TWEEN.Easing.Quintic.InOut)
-        .start();
+        .onUpdate(function() {
+            camera.lookAt(camera.target);
+        }).start();
+
+
+
+
     console.log(vector);
 }
 
@@ -313,7 +331,9 @@ function marbleClicked() {
         .easing(TWEEN.Easing.Quintic.In)
         .onComplete(function() {
 
-            camera.position.set(0, 0, 5000);
+            camera.position.set(0, 5000, -1000);
+            camera.target = sun.position.clone();
+            camera.lookAt(camera.target);
             scene.remove(boxScene);
             scene.add(mainScene);
             $('#navigation').load("content/navigation.html");
