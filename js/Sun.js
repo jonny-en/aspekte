@@ -41,9 +41,10 @@ function initSun() {
         blending: THREE.AdditiveBlending
     });
     var sunGlow = new THREE.Sprite(material);
+    var sunBigGlow = new THREE.Sprite(material);
     sunGlow.scale.set(0.8,0.8,0.8);
+    sunBigGlow.scale.set(100,100,100);
     sun.add(sunGlow);
-
 
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(20, 22, 22);
@@ -53,6 +54,8 @@ function initSun() {
   sunBigSphere = new THREE.Mesh(bigSphereGeometry, material);
 
     sun.add(sunBigSphere);
+    sunBigSphere.add(sunBigGlow);
+
 
 
 }

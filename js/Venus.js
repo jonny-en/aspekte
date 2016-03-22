@@ -27,6 +27,17 @@ function initVenus() {
     venus.position.set(distance/sizeFactor, 0, 0);
     venusCenter.add(venus);
 
+    //Glow
+       material = new THREE.SpriteMaterial({
+        map: loader.load("textures/lava/glow.png"),
+        color: 0xcc714a,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+    });
+    var venusBigGlow = new THREE.Sprite(material);
+    venusBigGlow.scale.set(100,100,100);
+
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);
      material = new THREE.MeshBasicMaterial({
@@ -34,4 +45,5 @@ function initVenus() {
     });
   venusBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     venus.add(venusBigSphere);
+    venusBigSphere.add(venusBigGlow);
 }

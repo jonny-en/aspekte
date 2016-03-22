@@ -11,7 +11,7 @@ function initMercury() {
     mercuryCenter = new THREE.Mesh(geometry, material);
     mainScene.add(mercuryCenter);
 
-    //Venus
+    //Mercury
      geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
     var loader = new THREE.TextureLoader();
 
@@ -27,6 +27,19 @@ function initMercury() {
     mercury.position.set(distance/sizeFactor, 0, 0);
     mercuryCenter.add(mercury);
 
+    //Glow
+       material = new THREE.SpriteMaterial({
+        map: loader.load("textures/lava/glow.png"),
+        color: 0x88716f,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+    });
+    var mercuryBigGlow = new THREE.Sprite(material);
+    mercuryBigGlow.scale.set(100,100,100);
+
+
+
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);
      material = new THREE.MeshBasicMaterial({
@@ -34,4 +47,5 @@ function initMercury() {
     });
   mercuryBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     mercury.add(mercuryBigSphere);
+    mercuryBigSphere.add(mercuryBigGlow);
 }
