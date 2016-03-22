@@ -12,7 +12,7 @@ function initMars() {
     mainScene.add(marsCenter);
 
     //Mars
-    geometry = new THREE.SphereGeometry(size , 22, 22);
+    geometry = new THREE.SphereGeometry(size , 30, 30);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/mars/diff.jpg');

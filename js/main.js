@@ -21,8 +21,9 @@ var windowHalfY = height / 2;
 var speedFactor = 1;
 var sizeFactor = 1;
 
-//Access with planet_parameters.mercury_.size
+//Access with planet_parameters.[mercury].size
 var planet_parameters = {
+<<<<<<< Updated upstream
   mercury : {size: 0.002439, distance: 58},
   venus : {size: 0.006056, distance: 108},
   earth : {size: 0.006367, distance: 150},
@@ -31,7 +32,19 @@ var planet_parameters = {
   saturn : {size: 0.077316, distance: 1433},
   uranus : {size: 0.025266, distance: 2872},
   neptune : {size: 0.024552, distance: 4495},
+=======
+    mercury: { size: 0.002439, distance: 58 },
+    venus: { size: 0.006056, distance: 108 },
+    earth: { size: 0.006367, distance: 150 },
+    mars: { size: 0.003386, distance: 228 },
+    jupiter: { size: 0.0654173, distance: 778 },
+    saturn: { size: 0.077316, distance: 1433 },
+    uranus: { size: 0.025266, distance: 2872 },
+    neptune: { size: 0.024552, distance: 4495 },
+>>>>>>> Stashed changes
 };
+
+var planets_moving = true;
 
 init();
 
@@ -135,11 +148,11 @@ function initMarbleScene() {
     //Marble
     var material = new THREE.MeshBasicMaterial({ map: starTexture, envMap: cubeCamera.renderTarget, reflectivity: 0.5 });
     marble = new THREE.Mesh(new THREE.SphereGeometry(15, 30, 30), material);
-    marble.position.set(0,15,0);
+    marble.position.set(0, 15, 0);
     boxScene.add(marble);
 
     //innerMarble
-    material = new THREE.MeshBasicMaterial({ side: THREE.BackSide, color: 0x000000});
+    material = new THREE.MeshBasicMaterial({ side: THREE.BackSide, color: 0x000000 });
     innerMarble = new THREE.Mesh(new THREE.SphereGeometry(13, 30, 30), material);
     marble.add(innerMarble);
 
@@ -167,20 +180,16 @@ function animate() {
 
 function render() {
     TWEEN.update();
+    var delta = 5 * clock.getDelta();
 
 
     if (marbleIsClicked === false) {
-        var delta = 5 * clock.getDelta();
         lon += 0.15;
         lat = Math.max(-85, Math.min(85, lat));
         phi = THREE.Math.degToRad(90 - lat);
         theta = THREE.Math.degToRad(lon);
 
         uniforms.time.value += 0.2 * delta;
-
-        //PlanetRotations
-        sun.rotation.y += 0.025 * delta;
-        //earth.rotation.y += 0.4 * delta;
 
         camera.position.x = 100 * Math.sin(phi) * Math.cos(theta);
         camera.position.y = 100 * Math.cos(phi);
@@ -192,14 +201,20 @@ function render() {
         innerMarble.visible = true;
         marble.visible = true; // *cough*
     }
-    //earthCenter.rotation.z -= 0.107 * speedFactor * delta;
-    //marsCenter.rotation.z -= 0.086 * speedFactor * delta;
-    //venusCenter.rotation.z -= 0.126 * speedFactor * delta;
-    //mercuryCenter.rotation.z -= 0.172 * speedFactor * delta;
-    //jupiterCenter.rotation.z -= 0.047 * speedFactor * delta;
-    //saturnCenter.rotation.z -= 0.034 * speedFactor * delta;
-    //uranusCenter.rotation.z -= 0.024 * speedFactor * delta;
-    //neptuneCenter.rotation.z -= 0.019 * speedFactor * delta;
+    //PlanetRotations
+        sun.rotation.y += 0.025 * delta;
+        mars.rotation.x += 0.4 * delta;
+
+    if (planets_moving) {
+        earthCenter.rotation.z -= 0.107 * speedFactor * delta;
+        marsCenter.rotation.z -= 0.086 * speedFactor * delta;
+        venusCenter.rotation.z -= 0.126 * speedFactor * delta;
+        mercuryCenter.rotation.z -= 0.172 * speedFactor * delta;
+        jupiterCenter.rotation.z -= 0.047 * speedFactor * delta;
+        saturnCenter.rotation.z -= 0.034 * speedFactor * delta;
+        uranusCenter.rotation.z -= 0.024 * speedFactor * delta;
+        neptuneCenter.rotation.z -= 0.019 * speedFactor * delta;
+    }
 
 
     //CameraPosition via mouse position
@@ -246,6 +261,7 @@ function removeGlow(planetBigSphere, bigGlow){
 
 function flyToPlanet(planet, planetCenter) {
     removeBigPlanets();
+    planets_moving = false;
     planetCenter.updateMatrixWorld();
     mainScene.updateMatrixWorld();
     planet.updateMatrixWorld();
@@ -253,19 +269,22 @@ function flyToPlanet(planet, planetCenter) {
     vector.setFromMatrixPosition(planet.matrixWorld);
 
     var tween = new TWEEN.Tween(camera.position).to({
-            x: vector.x + 0.02,
-            y: vector.y + 0.02,
-            z: vector.z + 0.02
-        }, 9000)
+            x: vector.x + 0.01,
+            y: vector.y + 0.01,
+            z: vector.z + 0.01
+        }, 7000)
         .easing(TWEEN.Easing.Quintic.InOut)
-        .onComplete(function() {})
+        .onComplete(function() {
+            $('#information_container').load('content/information.html');
+            $('#values').load('content/mars.html');
+        })
         .start();
 
     var tweenTarget = new TWEEN.Tween(camera.target).to({
             x: vector.x,
             y: vector.y,
             z: vector.z
-        }, 8000)
+        }, 6000)
         .easing(TWEEN.Easing.Quintic.InOut)
         .start();
     console.log(vector);
