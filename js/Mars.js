@@ -12,7 +12,7 @@ function initMars() {
     mainScene.add(marsCenter);
 
     //Mars
-    geometry = new THREE.SphereGeometry(size / sizeFactor, 22, 22);
+    geometry = new THREE.SphereGeometry(size , 22, 22);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/mars/diff.jpg');
@@ -23,7 +23,7 @@ function initMars() {
         normalMap: normal
     });
     mars = new THREE.Mesh(geometry, material);
-    mars.position.set(distance / sizeFactor, 0, 0);
+    mars.position.set(distance , 0, 0);
     marsCenter.add(mars);
 
     //Glow

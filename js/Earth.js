@@ -12,7 +12,7 @@ function initEarth() {
     mainScene.add(earthCenter);
 
     //Earth
-     geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
+     geometry = new THREE.SphereGeometry(size, 22, 22);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/earth/diff.jpg');
@@ -26,11 +26,11 @@ function initEarth() {
         specularMap: spec
     });
     earth = new THREE.Mesh(geometry, material);
-    earth.position.set(distance/sizeFactor, 0, 0);
+    earth.position.set(distance, 0, 0);
     earthCenter.add(earth);
 
     //Clouds
-     geometry = new THREE.SphereGeometry(size/sizeFactor + 0.001, 22, 22);
+     geometry = new THREE.SphereGeometry(size + 0.001, 22, 22);
     var clouds = loader.load('textures/earth/cloud.png');
      material = new THREE.MeshPhongMaterial({
         map: clouds,

@@ -28,7 +28,7 @@ function initSun() {
 
     });
 
-    sun = new THREE.Mesh(new THREE.SphereGeometry(size/sizeFactor, 30, 30), material);
+    sun = new THREE.Mesh(new THREE.SphereGeometry(size, 30, 30), material);
     mainScene.add(sun);
 
 

@@ -12,7 +12,7 @@ function initJupiter() {
     mainScene.add(jupiterCenter);
 
     //Mars
-     geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
+     geometry = new THREE.SphereGeometry(size, 22, 22);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/jupiter/diff.jpg');
@@ -22,7 +22,7 @@ function initJupiter() {
         shininess: 0.4
     });
     jupiter = new THREE.Mesh(geometry, material);
-    jupiter.position.set(distance/sizeFactor, 0, 0);
+    jupiter.position.set(distance, 0, 0);
     jupiterCenter.add(jupiter);
 
     //Glow

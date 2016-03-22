@@ -12,7 +12,7 @@ function initUranus() {
     mainScene.add(uranusCenter);
 
     //Uranus
-     geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
+     geometry = new THREE.SphereGeometry(size, 22, 22);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/uranus/diff.jpg');
@@ -22,7 +22,7 @@ function initUranus() {
         shininess: 0.4
     });
     uranus = new THREE.Mesh(geometry, material);
-    uranus.position.set(distance/sizeFactor, 0, 0);
+    uranus.position.set(distance, 0, 0);
     uranusCenter.add(uranus);
 
     //Glow

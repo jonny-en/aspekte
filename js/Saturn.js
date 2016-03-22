@@ -12,7 +12,7 @@ function initSaturn() {
     mainScene.add(saturnCenter);
 
     //Saturn
-    geometry = new THREE.SphereGeometry(size / sizeFactor, 32, 32);
+    geometry = new THREE.SphereGeometry(size, 32, 32);
     var loader = new THREE.TextureLoader();
 
     var saturnMap = loader.load('textures/saturn/saturnmap.jpg');
@@ -23,7 +23,7 @@ function initSaturn() {
         specular: new THREE.Color('#190909')
     });
     saturn = new THREE.Mesh(geometry, material);
-    saturn.position.set(distance / sizeFactor, 0, 0);
+    saturn.position.set(distance, 0, 0);
     saturnCenter.add(saturn);
 
     //Saturn Ring

@@ -13,7 +13,7 @@ function initNeptune() {
     mainScene.add(neptuneCenter);
 
     //Neptune
-     geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
+     geometry = new THREE.SphereGeometry(size, 22, 22);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/neptune/diff.jpg');
@@ -23,7 +23,7 @@ function initNeptune() {
         shininess: 0.4
     });
     neptune = new THREE.Mesh(geometry, material);
-    neptune.position.set(distance/sizeFactor, 0, 0);
+    neptune.position.set(distance, 0, 0);
     neptuneCenter.add(neptune);
 
     //Glow
