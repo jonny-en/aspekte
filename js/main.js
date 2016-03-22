@@ -23,25 +23,15 @@ var sizeFactor = 1;
 
 //Access with planet_parameters.[mercury].size
 var planet_parameters = {
-<<<<<<< Updated upstream
-  mercury : {size: 0.002439, distance: 58},
-  venus : {size: 0.006056, distance: 108},
-  earth : {size: 0.006367, distance: 150},
-  mars : {size: 0.003386, distance: 228},
-  jupiter : {size: 0.0654173, distance: 778},
-  saturn : {size: 0.077316, distance: 1433},
-  uranus : {size: 0.025266, distance: 2872},
-  neptune : {size: 0.024552, distance: 4495},
-=======
-    mercury: { size: 0.002439, distance: 58 },
-    venus: { size: 0.006056, distance: 108 },
+
+    mercury: { size: 0.006367, distance: 58 },
+    venus: { size: 0.006367, distance: 108 },
     earth: { size: 0.006367, distance: 150 },
-    mars: { size: 0.003386, distance: 228 },
-    jupiter: { size: 0.0654173, distance: 778 },
-    saturn: { size: 0.077316, distance: 1433 },
-    uranus: { size: 0.025266, distance: 2872 },
-    neptune: { size: 0.024552, distance: 4495 },
->>>>>>> Stashed changes
+    mars: { size: 0.006367, distance: 228 },
+    jupiter: { size: 0.006367, distance: 778 },
+    saturn: { size: 0.006367, distance: 1433 },
+    uranus: { size: 0.006367, distance: 2872 },
+    neptune: { size: 0.006367, distance: 4495 },
 };
 
 var planets_moving = true;
@@ -202,8 +192,8 @@ function render() {
         marble.visible = true; // *cough*
     }
     //PlanetRotations
-        sun.rotation.y += 0.025 * delta;
-        mars.rotation.x += 0.4 * delta;
+    sun.rotation.y += 0.025 * delta;
+    mars.rotation.x += 0.4 * delta;
 
     if (planets_moving) {
         earthCenter.rotation.z -= 0.107 * speedFactor * delta;
@@ -252,11 +242,12 @@ function addBigPlanets() {
     neptune.add(neptuneBigSphere);
 }
 
-function addGlow(planetBigSphere, bigGlow){
-  planetBigSphere.add(bigGlow);
+function addGlow(planetBigSphere, bigGlow) {
+    planetBigSphere.add(bigGlow);
 }
-function removeGlow(planetBigSphere, bigGlow){
-  planetBigSphere.remove(bigGlow);
+
+function removeGlow(planetBigSphere, bigGlow) {
+    planetBigSphere.remove(bigGlow);
 }
 
 function flyToPlanet(planet, planetCenter) {
