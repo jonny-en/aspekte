@@ -2,8 +2,8 @@ var venus, venusCenter, venusBigSphere;
 
 function initVenus() {
 
-    var size = 0.006056;
-    var distance = 108;
+    var size = planet_parameters.venus_.size;
+    var distance = planet_parameters.venus_.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);

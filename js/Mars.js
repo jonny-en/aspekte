@@ -2,8 +2,8 @@ var mars, marsCenter, marsBigSphere;
 
 function initMars() {
 
-    var size = 0.003386;
-    var distance = 228;
+    var size = planet_parameters.mars_.size;
+    var distance = planet_parameters.mars_.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
@@ -26,6 +26,17 @@ function initMars() {
     mars.position.set(distance / sizeFactor, 0, 0);
     marsCenter.add(mars);
 
+    //Glow
+       material = new THREE.SpriteMaterial({
+        map: loader.load("textures/lava/glow.png"),
+        color: 0xaf241f,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+    });
+    var marsBigGlow = new THREE.Sprite(material);
+    marsBigGlow.scale.set(100,100,100);
+
     //Big sphere
     var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);
     material = new THREE.MeshBasicMaterial({
@@ -33,5 +44,6 @@ function initMars() {
     });
     marsBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     mars.add(marsBigSphere);
-  
+    marsBigSphere.add(marsBigGlow);
+
 }

@@ -2,8 +2,8 @@ var jupiter, jupiterCenter, jupiterBigSphere;
 
 function initJupiter() {
 
-    var size = 0.0654173;
-    var distance = 778;
+    var size = planet_parameters.jupiter_.size;
+    var distance = planet_parameters.jupiter_.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
@@ -11,7 +11,7 @@ function initJupiter() {
     jupiterCenter = new THREE.Mesh(geometry, material);
     mainScene.add(jupiterCenter);
 
-    //Venus
+    //Mars
      geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
     var loader = new THREE.TextureLoader();
 
@@ -25,6 +25,17 @@ function initJupiter() {
     jupiter.position.set(distance/sizeFactor, 0, 0);
     jupiterCenter.add(jupiter);
 
+    //Glow
+       material = new THREE.SpriteMaterial({
+        map: loader.load("textures/lava/glow.png"),
+        color: 0xb1968a,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+    });
+    var jupiterBigGlow = new THREE.Sprite(material);
+    jupiterBigGlow.scale.set(100,100,100);
+
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);
      material = new THREE.MeshBasicMaterial({
@@ -32,4 +43,5 @@ function initJupiter() {
     });
   jupiterBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     jupiter.add(jupiterBigSphere);
+    jupiterBigSphere.add(jupiterBigGlow);
 }

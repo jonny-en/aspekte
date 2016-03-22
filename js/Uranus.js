@@ -2,8 +2,8 @@ var uranus, uranusCenter, uranusBigSphere;
 
 function initUranus() {
 
-    var size = 0.025266;
-    var distance = 2872;
+    var size = planet_parameters.uranus_.size;
+    var distance = planet_parameters.uranus_.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
@@ -11,7 +11,7 @@ function initUranus() {
     uranusCenter = new THREE.Mesh(geometry, material);
     mainScene.add(uranusCenter);
 
-    //Venus
+    //Uranus
      geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
     var loader = new THREE.TextureLoader();
 
@@ -25,6 +25,17 @@ function initUranus() {
     uranus.position.set(distance/sizeFactor, 0, 0);
     uranusCenter.add(uranus);
 
+    //Glow
+       material = new THREE.SpriteMaterial({
+        map: loader.load("textures/lava/glow.png"),
+        color: 0x67d4e7,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+    });
+    var uranusBigGlow = new THREE.Sprite(material);
+    uranusBigGlow.scale.set(100,100,100);
+
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);
      material = new THREE.MeshBasicMaterial({
@@ -32,4 +43,5 @@ function initUranus() {
     });
   uranusBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     uranus.add(uranusBigSphere);
+    uranusBigSphere.add(uranusBigGlow);
 }

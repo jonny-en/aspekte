@@ -2,8 +2,8 @@ var mercury, mercuryCenter, mercuryBigSphere;
 
 function initMercury() {
 
-    var size =0.002439;
-    var distance = 58;
+    var size = planet_parameters.mercury_.size;
+    var distance = planet_parameters.mercury_.distance;
 
     //Center for rotation
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
