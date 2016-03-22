@@ -237,6 +237,12 @@ function addBigPlanets() {
     neptune.add(neptuneBigSphere);
 }
 
+$('#mercury').mouseenter(function () {
+  mercuryBigSphere.add(mercuryBigGlow);
+})
+.mouseleave(function () {
+  mercuryBigSphere.remove(mercuryBigGlow);
+});
 function flyToPlanet(planet, planetCenter) {
     removeBigPlanets();
     planetCenter.updateMatrixWorld();

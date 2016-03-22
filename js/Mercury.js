@@ -47,5 +47,4 @@ function initMercury() {
     });
   mercuryBigSphere = new THREE.Mesh(bigSphereGeometry, material);
     mercury.add(mercuryBigSphere);
-    mercuryBigSphere.add(mercuryBigGlow);
 }
