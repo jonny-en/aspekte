@@ -122,8 +122,11 @@ p {
 }
 
 #information {
-    width: 200px;
-    height: 325px;
+    font-family: 'Droid Serif', sans-serif;
+    font-size: 10pt;
+    width: 250px;
+    height: auto;
+    padding-bottom: 20px;
     background-color: white;
     position: absolute;
     left: 10%;
@@ -132,7 +135,7 @@ p {
 
 #information .top {
     font-family: 'Droid Sans', sans-serif;
-    height: 75px;
+    height: 95px;
     width: 100%;
     background-color: #2f3e6a;
     ;
@@ -142,14 +145,52 @@ p {
 }
 
 #information .circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 60px;
-    font-size: 20px;
+    font-weight: bold;
+    width: 80px;
+    height: 56px;
+    padding-top: 24px;
+    border-radius: 80px;
+    font-size: 9pt;
     color: #fff;
-    line-height: 60px;
+    line-height: 18px;
     text-align: center;
     background: #25A6E1;
-    margin-left: 70px;
-    margin-top: -25px;
+    margin-left: 85px;
+    margin-top: -40px;
+    margin-bottom: 10px;
+}
+
+#information .line {
+    height: 5px;
+    width: 62px;
+    margin: 0 auto;
+    background-image: url('../textures/arrow.png');
+}
+
+#values {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#values .value,
+#values .description {
+    line-height: 20px;
+    color: #989A8F;
+}
+
+#values .value {
+    font-weight: bold;
+}
+
+.quote {
+    color: #989A8F;
+    font-size: 8pt;
+    text-align: right;
+}
+
+.quote.bold {
+    font-size: 9pt;
+    font-weight: bold;
+    text-align: right;
+    text-align: justify;
 }
