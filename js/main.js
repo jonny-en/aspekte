@@ -234,9 +234,9 @@ function flyToPlanet(planet, planetCenter) {
     vector.setFromMatrixPosition(planet.matrixWorld);
 
     var tween = new TWEEN.Tween(camera.position).to({
-            x: vector.x + 0.5,
-            y: vector.y + 0.1,
-            z: vector.z
+            x: vector.x + 0.02,
+            y: vector.y + 0.02,
+            z: vector.z + 0.02
         }, 9000)
         .easing(TWEEN.Easing.Quintic.InOut)
         .onComplete(function() {})
