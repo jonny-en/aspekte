@@ -9,7 +9,7 @@ function initVenus() {
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
     var material = new THREE.MeshBasicMaterial();
     venusCenter = new THREE.Mesh(geometry, material);
-    scene.add(venusCenter);
+    mainScene.add(venusCenter);
 
     //Venus
      geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);

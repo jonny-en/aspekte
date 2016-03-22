@@ -1,4 +1,4 @@
-var uniforms, material, sun, sunBigSphere;
+var uniforms, material, sun, sunBigSphere, sunGlow;
 
 function initSun() {
     var textureLoader = new THREE.TextureLoader();
@@ -29,20 +29,21 @@ function initSun() {
     });
 
     sun = new THREE.Mesh(new THREE.SphereGeometry(size/sizeFactor, 30, 30), material);
-    scene.add(sun);
+    mainScene.add(sun);
 
 
     //Glow
-     var material = new THREE.SpriteMaterial({
+      var material = new THREE.SpriteMaterial({
         map: textureLoader.load("textures/lava/glow.png"),
         color: 0xFFDB99,
         transparent: true,
         opacity: 0.8,
         blending: THREE.AdditiveBlending
     });
-   	var sunGlow = new THREE.Sprite(material);
-   	sunGlow.scale.set(0.8,0.8,0.8);
+    var sunGlow = new THREE.Sprite(material);
+    sunGlow.scale.set(0.8,0.8,0.8);
     sun.add(sunGlow);
+
 
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(20, 22, 22);

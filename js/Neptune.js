@@ -10,7 +10,7 @@ function initNeptune() {
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
     var material = new THREE.MeshBasicMaterial();
     neptuneCenter = new THREE.Mesh(geometry, material);
-    scene.add(neptuneCenter);
+    mainScene.add(neptuneCenter);
 
     //Neptune
      geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);

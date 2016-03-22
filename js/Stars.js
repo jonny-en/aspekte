@@ -1,31 +1,30 @@
+
  function initStars() {
      var loader = new THREE.TextureLoader();
-     texture = loader.load('textures/starmap.png');
-
-     texture.wrapS = THREE.RepeatWrapping;
-     texture.wrapT = THREE.RepeatWrapping;
-     texture.repeat.set(6, 6);
+     var starTexture = loader.load('textures/starmap.png');
+     starTexture.wrapS = THREE.RepeatWrapping;
+     starTexture.wrapT = THREE.RepeatWrapping;
+     starTexture.repeat.set(6, 6);
 
      var material = new THREE.MeshBasicMaterial({
-         map: texture,
+         map: starTexture,
          transparent: true,
-         side: THREE.BackSide,
-         opacity: 0.9
+         side: THREE.DoubleSide,
+         opacity: 1
      });
 
-     var geometry = new THREE.SphereGeometry(40, 6, 6);
+     var geometry = new THREE.SphereGeometry(20000, 22, 22);
      stars = new THREE.Mesh(geometry, material);
-     stars.rotation.x = Math.PI * 2
-     stars.material.opacity = 0.5;
-     scene.add(stars);
+     stars.rotation.x = Math.PI * 2;
+     mainScene.add(stars);
 
-     var geometry = new THREE.SphereGeometry(30, 6, 6);
+     geometry = new THREE.SphereGeometry(18000, 22,22);
      stars2 = new THREE.Mesh(geometry, material);
      stars2.rotation.x = Math.PI * 1;
-     scene.add(stars2);
+     mainScene.add(stars2);
 
-     var geometry = new THREE.SphereGeometry(20, 6, 6);
+     geometry = new THREE.SphereGeometry(16000, 22,22);
      stars3 = new THREE.Mesh(geometry, material);
      stars3.rotation.x = Math.PI * 0.5;
-     scene.add(stars3);
+     mainScene.add(stars3);
  }

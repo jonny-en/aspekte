@@ -1,39 +1,40 @@
-var container, stats;
-
+var container;
 var clock = new THREE.Clock();
 
-var camera, scene, renderer, composer;
+var camera, cubeCamera;
+var scene, mainScene, boxScene, renderer, composer;
+var marble, innerMarble, marbleIsClicked = false;
 
-var mouseX = 0,
-    mouseY = 0,
-    lat = 0,
-    lon = 0,
-    phy = 0,
-    theta = 0;
+var raycaster;
 
+var mouse;
+var lat = 0,
+    phi = 0,
+    theta = 0,
+    lon = 0;
 var width = window.innerWidth || 2;
 var height = window.innerHeight || 2;
 
 var windowHalfX = width / 2;
 var windowHalfY = height / 2;
 
-var sizeFactor = 1;
 var speedFactor = 1;
-
-
+var sizeFactor = 1;
 
 init();
-animate();
+
 
 function init() {
     container = document.getElementById('container');
 
-    //Camera
-    camera = new THREE.PerspectiveCamera(35, windowHalfX / windowHalfY, 1, 10000);
+    //Camera FOV WAS 35!!!!!!
+    camera = new THREE.PerspectiveCamera(75, windowHalfX / windowHalfY, 0.0001, 30000);
 
-
+    sizeFactor = 1;
     //Scene
     scene = new THREE.Scene();
+    mainScene = new THREE.Scene();
+
 
     //Renderer
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -41,34 +42,38 @@ function init() {
     container.appendChild(renderer.domElement);
     renderer.autoClear = false;
 
+    //Raycaster
+    raycaster = new THREE.Raycaster();
+    mouse = new THREE.Vector2();
+
     //Lights
     var light = new THREE.PointLight(0xf0f0f0, 1);
     light.position.set(0, 0, 0);
-    scene.add(light);
+    mainScene.add(light);
 
-      var light2 = new THREE.AmbientLight(0x0c0c0c, 1);
+    var light2 = new THREE.AmbientLight(0x0c0c0c, 1);
     light2.position.set(0, 0, 0);
-    scene.add(light2);
+    mainScene.add(light2);
 
     //InitPlanets
     initSun();
-    //initStars();
+    initStars();
     initEarth();
-  initMars();
-   initVenus();
-   initMercury();
-   initJupiter();
- initSaturn();
-   initUranus();
-  initNeptune();
+    initMars();
+    initVenus();
+    initMercury();
+    initJupiter();
+    initSaturn();
+    initUranus();
+    initNeptune();
 
-    camera.position.set(1433+1,2,0);
-//  camera.lookAt = scene.position;
-   camera.target = saturn.position;
+    camera.position.set(0, 0, 0);
+
+    camera.target = sun.position.clone();
 
     //Init Renderpasses
     var renderModel = new THREE.RenderPass(scene, camera);
-    var effectBloom = new THREE.BloomPass(1.2, 25, 20, 256);
+    var effectBloom = new THREE.BloomPass(0.3, 25, 20, 256);
     var effectFilm = new THREE.FilmPass(0.0, 0.0, 2048, false);
     effectFilm.renderToScreen = true;
     composer = new THREE.EffectComposer(renderer);
@@ -83,6 +88,49 @@ function init() {
     document.addEventListener('mousedown', onDocumentMouseDown, false);
     document.addEventListener('touchstart', onDocumentTouchStart, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
+    document.addEventListener('mousewheel', onDocumentMouseWheel, false);
+    document.addEventListener('DOMMOuseScroll', onDocumentMouseWheel, false);
+
+
+
+    initMarbleScene();
+    animate();
+}
+
+function initMarbleScene() {
+    boxScene = new THREE.Scene();
+    var textureLoader = new THREE.TextureLoader();
+
+    texture = textureLoader.load('textures/2294472375_24a3b8ef46_o.jpg');
+
+    texture.mapping = THREE.UVMapping;
+    var mesh = new THREE.Mesh(new THREE.SphereGeometry(500, 60, 40), new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide }));
+    mesh.scale.x = -1;
+    boxScene.add(mesh);
+    scene.add(boxScene);
+
+    //CubeCamera
+    cubeCamera = new THREE.CubeCamera(1, 1000, 256);
+    cubeCamera.renderTarget.texture.minFilter = THREE.LinearMipMapLinearFilter;
+    boxScene.add(cubeCamera);
+
+    var loader = new THREE.TextureLoader();
+    starTexture = loader.load('textures/starmap.jpg');
+    starTexture.wrapS = THREE.RepeatWrapping;
+    starTexture.wrapT = THREE.RepeatWrapping;
+    starTexture.repeat.set(0.33, 0.33);
+
+    //Marble
+    var material = new THREE.MeshBasicMaterial({ map: starTexture, envMap: cubeCamera.renderTarget, reflectivity: 0.5 });
+    marble = new THREE.Mesh(new THREE.SphereGeometry(15, 30, 30), material);
+    boxScene.add(marble);
+
+    //innerMarble
+    material = new THREE.MeshBasicMaterial({ side: THREE.BackSide, color: 0x000000});
+    innerMarble = new THREE.Mesh(new THREE.SphereGeometry(13, 30, 30), material);
+    boxScene.add(innerMarble);
+
+
 
 }
 
@@ -105,32 +153,102 @@ function animate() {
 }
 
 function render() {
-    var delta = 5 * clock.getDelta();
-
-    uniforms.time.value += 0.2 * delta;
-
-    //PlanetRotations
-   sun.rotation.y += 0.025 * delta;
-//earth.rotation.y += 0.4 * delta;
+    TWEEN.update();
 
 
-  //earthCenter.rotation.y -= 0.107 * speedFactor * delta;
-  // marsCenter.rotation.y -= 0.086 * speedFactor * delta;
-  // venusCenter.rotation.y -= 0.126 * speedFactor * delta;
-  // mercuryCenter.rotation.y -= 0.172 * speedFactor * delta;
-  // jupiterCenter.rotation.y -= 0.047 * speedFactor * delta;
-  //  saturnCenter.rotation.y -= 0.034 * speedFactor * delta;
-//  uranusCenter.rotation.y -= 0.024 * speedFactor * delta;
-  // neptuneCenter.rotation.y -= 0.019 * speedFactor * delta;
+    if (marbleIsClicked === false) {
+        var delta = 5 * clock.getDelta();
+        lon += 0.15;
+        lat = Math.max(-85, Math.min(85, lat));
+        phi = THREE.Math.degToRad(90 - lat);
+        theta = THREE.Math.degToRad(lon);
+
+        uniforms.time.value += 0.2 * delta;
+
+        //PlanetRotations
+        sun.rotation.y += 0.025 * delta;
+        //earth.rotation.y += 0.4 * delta;
+
+        camera.position.x = 100 * Math.sin(phi) * Math.cos(theta);
+        camera.position.y = 100 * Math.cos(phi);
+        camera.position.z = 100 * Math.sin(phi) * Math.sin(theta);
+
+        marble.visible = false; // *cough*
+        innerMarble.visible = false;
+        cubeCamera.updateCubeMap(renderer, scene);
+        innerMarble.visible = true;
+        marble.visible = true; // *cough*
+    }
+    //earthCenter.rotation.z -= 0.107 * speedFactor * delta;
+    //marsCenter.rotation.z -= 0.086 * speedFactor * delta;
+    //venusCenter.rotation.z -= 0.126 * speedFactor * delta;
+    //mercuryCenter.rotation.z -= 0.172 * speedFactor * delta;
+    //jupiterCenter.rotation.z -= 0.047 * speedFactor * delta;
+    //saturnCenter.rotation.z -= 0.034 * speedFactor * delta;
+    //uranusCenter.rotation.z -= 0.024 * speedFactor * delta;
+    //neptuneCenter.rotation.z -= 0.019 * speedFactor * delta;
 
 
-    //CameraPosition = MousePosition
-  camera.position.x = camera.target.x + (mouseX * 3);
-    camera.position.z = camera.target.y + (mouseY * 2);
+    //CameraPosition via mouse position
     camera.lookAt(camera.target);
     camera.updateProjectionMatrix();
     renderer.clear();
     composer.render(0.01);
+}
+
+function removeBigPlanets() {
+    earth.remove(earthBigSphere);
+    mars.remove(marsBigSphere);
+    saturn.remove(saturnBigSphere);
+    mercury.remove(mercuryBigSphere);
+    venus.remove(venusBigSphere);
+    jupiter.remove(jupiterBigSphere);
+    mercury.remove(mercuryBigSphere);
+    saturn.remove(saturnBigSphere);
+    uranus.remove(uranusBigSphere);
+    neptune.remove(neptuneBigSphere);
+    sun.remove(sunBigSphere);
+
+}
+
+function addBigPlanets() {
+    earth.add(earthBigSphere);
+    mars.add(marsBigSphere);
+    saturn.add(saturnBigSphere);
+    mercury.add(mercuryBigSphere);
+    venus.add(venusBigSphere);
+    jupiter.add(jupiterBigSphere);
+    mercury.add(mercuryBigSphere);
+    saturn.add(saturnBigSphere);
+    uranus.add(uranusBigSphere);
+    neptune.add(neptuneBigSphere);
+}
+
+function flyToPlanet(planet, planetCenter) {
+    removeBigPlanets();
+    planetCenter.updateMatrixWorld();
+    mainScene.updateMatrixWorld();
+    planet.updateMatrixWorld();
+    var vector = new THREE.Vector3();
+    vector.setFromMatrixPosition(planet.matrixWorld);
+
+    var tween = new TWEEN.Tween(camera.position).to({
+            x: vector.x + 0.5,
+            y: vector.y + 0.1,
+            z: vector.z
+        }, 9000)
+        .easing(TWEEN.Easing.Quintic.InOut)
+        .onComplete(function() {})
+        .start();
+
+    var tweenTarget = new TWEEN.Tween(camera.target).to({
+            x: vector.x,
+            y: vector.y,
+            z: vector.z
+        }, 8000)
+        .easing(TWEEN.Easing.Quintic.InOut)
+        .start();
+    console.log(vector);
 }
 
 function onDocumentTouchStart(event) {
@@ -143,13 +261,48 @@ function onDocumentTouchStart(event) {
 function onDocumentMouseDown(event) {
     event.preventDefault();
 
-    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    var intersects = raycaster.intersectObjects([marble], true);
+    if (intersects.length > 0) {
+        console.log("hellooo");
+        marbleClicked();
+    }
 }
+
+function marbleClicked() {
+    marbleIsClicked = true;
+    var tween = new TWEEN.Tween(camera.position).to({
+            x: 0,
+            y: 0,
+            z: 0
+        }, 1000)
+        .easing(TWEEN.Easing.Quintic.In)
+        .onComplete(function() {
+
+            camera.position.set(0, 0, 5000);
+            scene.remove(boxScene);
+            scene.add(mainScene);
+
+        })
+        .start();
+}
+
 
 function onDocumentMouseMove(event) {
     event.preventDefault();
 
-    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+function onDocumentMouseWheel(event) {
+
+    event = window.event || event;
+    if ((event.wheelDelta < 0 && camera.position.z > 800 && event.wheelDelta + camera.position.z > 800) || (event.wheelDelta > 0 && camera.position.z < 10000 && event.wheelDelta + camera.position.z < 10000)) {
+        camera.position.z += event.wheelDelta;
+    }
+
 }

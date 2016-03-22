@@ -9,7 +9,7 @@ function initMercury() {
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
     var material = new THREE.MeshBasicMaterial();
     mercuryCenter = new THREE.Mesh(geometry, material);
-    scene.add(mercuryCenter);
+    mainScene.add(mercuryCenter);
 
     //Venus
      geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);

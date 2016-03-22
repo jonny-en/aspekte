@@ -9,7 +9,7 @@ function initJupiter() {
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
     var material = new THREE.MeshBasicMaterial();
     jupiterCenter = new THREE.Mesh(geometry, material);
-    scene.add(jupiterCenter);
+    mainScene.add(jupiterCenter);
 
     //Venus
      geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);

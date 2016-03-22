@@ -9,7 +9,7 @@ function initEarth() {
     var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
     var material = new THREE.MeshBasicMaterial();
     earthCenter = new THREE.Mesh(geometry, material);
-    scene.add(earthCenter);
+    mainScene.add(earthCenter);
 
     //Earth
      geometry = new THREE.SphereGeometry(size/sizeFactor, 22, 22);
