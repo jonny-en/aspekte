@@ -123,12 +123,13 @@ function initMarbleScene() {
     //Marble
     var material = new THREE.MeshBasicMaterial({ map: starTexture, envMap: cubeCamera.renderTarget, reflectivity: 0.5 });
     marble = new THREE.Mesh(new THREE.SphereGeometry(15, 30, 30), material);
+    marble.position.set(0,15,0);
     boxScene.add(marble);
 
     //innerMarble
     material = new THREE.MeshBasicMaterial({ side: THREE.BackSide, color: 0x000000});
     innerMarble = new THREE.Mesh(new THREE.SphereGeometry(13, 30, 30), material);
-    boxScene.add(innerMarble);
+    marble.add(innerMarble);
 
 
 
@@ -274,9 +275,10 @@ function onDocumentMouseDown(event) {
 
 function marbleClicked() {
     marbleIsClicked = true;
+    $("#pcontainer").empty();
     var tween = new TWEEN.Tween(camera.position).to({
             x: 0,
-            y: 0,
+            y: 15,
             z: 0
         }, 1000)
         .easing(TWEEN.Easing.Quintic.In)
@@ -285,7 +287,7 @@ function marbleClicked() {
             camera.position.set(0, 0, 5000);
             scene.remove(boxScene);
             scene.add(mainScene);
-
+            $('#navigation').load("content/navigation.html");
         })
         .start();
 }

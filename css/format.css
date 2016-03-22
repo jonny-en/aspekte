@@ -22,17 +22,72 @@ body {
     width: 100%;
     color: #188BC0;
     padding: 5px;
-    font-weight: lighter;
     font-size: 20px;
     text-align: center;
     z-index: 1000;
-    text-shadow: 1px 2px 0px #25A6E1
+    text-shadow: 1px 1px 1px #000000;
+    margin: 0 auto;
 }
 
-.big{
-    font-size: 30px;
-    color: white;
+.small {
+    font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px #000000;
 }
+
+.big {
+    color: white;
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+    margin: 0px;
+    padding: 0px 0px 6px 0px;
+    font-size: 51px;
+    line-height: 40px;
+    letter-spacing: -2px;
+    font-weight: bold;
+    text-transform: none;
+}
+
+#pcontainer {
+    position: absolute;
+    bottom: 0%;
+    bottom: 30%;
+    width: 100%;
+}
+
+p:first-letter {
+    text-transform: uppercase;
+}
+
+p {
+
+    text-align: justify-all;
+    font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
+    color: white;
+    letter-spacing: 0.1em;
+    text-align: left;
+    margin: 0 auto;
+    margin-bottom: 0px;
+    text-transform: lowercase;
+    line-height: 145%;
+    font-size: 12pt;
+    font-variant: small-caps;
+    width: 400px;
+}
+
+.smallquote {
+    text-align: justify;
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+    font-size: 10pt;
+    line-height: 14px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #188BC0;
+}
+
 #content {
     font-size: 13px;
     text-align: justify;
