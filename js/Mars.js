@@ -16,11 +16,12 @@ function initMars() {
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/mars/diff.jpg');
-    var normal = loader.load('textures/mars/normal.jpg');
+    var normal = loader.load('textures/mars/marsbump1k.jpg');
 
     material = new THREE.MeshPhongMaterial({
         map: diffuse,
-        normalMap: normal
+        bumpMap: normal,
+        bumpScale: size/100
     });
     mars = new THREE.Mesh(geometry, material);
     mars.position.set(distance , 0, 0);

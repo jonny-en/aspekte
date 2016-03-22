@@ -21,7 +21,7 @@ function initMercury() {
      material = new THREE.MeshPhongMaterial({
         map: diffuse,
         bumpMap: bump,
-        bumpScale: 0.01
+        bumpScale: size/100
     });
     mercury = new THREE.Mesh(geometry, material);
     mercury.position.set(distance, 0, 0);

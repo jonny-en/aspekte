@@ -19,7 +19,8 @@ function initSaturn() {
 
     material = new THREE.MeshPhongMaterial({
         map: saturnMap,
-        bumpScale: 0.05,
+        bumpMap: saturnMap,
+        bumpScale: size/100,
         specular: new THREE.Color('#190909')
     });
     saturn = new THREE.Mesh(geometry, material);

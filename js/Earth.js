@@ -22,7 +22,7 @@ function initEarth() {
      material = new THREE.MeshPhongMaterial({
         map: diffuse,
         bumpMap: bump,
-        bumpScale: 0.01,
+        bumpScale: size/100,
         specularMap: spec
     });
     earth = new THREE.Mesh(geometry, material);
@@ -30,7 +30,7 @@ function initEarth() {
     earthCenter.add(earth);
 
     //Clouds
-     geometry = new THREE.SphereGeometry(size + 0.001, 22, 22);
+     geometry = new THREE.SphereGeometry(size + 0.0001, 22, 22);
     var clouds = loader.load('textures/earth/cloud.png');
      material = new THREE.MeshPhongMaterial({
         map: clouds,

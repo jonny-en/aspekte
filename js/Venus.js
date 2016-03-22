@@ -21,7 +21,7 @@ function initVenus() {
      material = new THREE.MeshPhongMaterial({
         map: diffuse,
         bumpMap: bump,
-        bumpScale: 0.001
+        bumpScale: size/100
     });
     venus = new THREE.Mesh(geometry, material);
     venus.position.set(distance, 0, 0);

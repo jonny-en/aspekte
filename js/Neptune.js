@@ -20,6 +20,8 @@ function initNeptune() {
 
      material = new THREE.MeshPhongMaterial({
         map: diffuse,
+        bumpmap: diffuse,
+        bumpScale: size/100,
         shininess: 0.4
     });
     neptune = new THREE.Mesh(geometry, material);

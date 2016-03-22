@@ -19,6 +19,8 @@ function initJupiter() {
 
      material = new THREE.MeshPhongMaterial({
         map: diffuse,
+        bumpMap: diffuse,
+        bumpScale: size/100,
         shininess: 0.4
     });
     jupiter = new THREE.Mesh(geometry, material);
