@@ -345,14 +345,14 @@ function flyToPlanet(planet, planetCenter, infoSrc) {
 }
 
 function flyToTopView() {
-    THREE.SceneUtils.detach(camera, camera.parent, scene);
-    camera.position.set(0, 1000, -1000);
-    camera.target = sun.position.clone();
-    camera.lookAt(camera.target);
-    addBigPlanets();
-    planets_moving = true;
-    turnsky = false;
-    topview_active = true;
+  THREE.SceneUtils.detach(camera, camera.parent, scene);
+  camera.position.set(0, 1000, -1000);
+  camera.target = sun.position.clone();
+  camera.lookAt(camera.target);
+  addBigPlanets();
+  planets_moving = true;
+  turnsky = false;
+  topview_active = true;
 }
 
 function onDocumentTouchStart(event) {
@@ -379,22 +379,31 @@ function onDocumentMouseDown(event) {
 
 function marbleClicked() {
 
-    marbleIsClicked = true;
-    $("#pcontainer").empty();
-    var tween = new TWEEN.Tween(camera.position).to({
-            x: 0,
-            y: 15,
-            z: 0
-        }, 1000)
-        .easing(TWEEN.Easing.Quintic.In)
-        .onComplete(function() {
-            camera.position.set(0, 5000, -1000);
-            camera.target = sun.position.clone();
-            camera.lookAt(camera.target);
-            scene.remove(boxScene);
-            scene.add(mainScene);
-            $('#navigation').load("content/navigation.html");
-        }).start();
+  marbleIsClicked = true;
+  $("#pcontainer").empty();
+  var tween = new TWEEN.Tween(camera.position).to({
+      x: 0,
+      y: 15,
+      z: 0
+    }, 1000)
+    .easing(TWEEN.Easing.Quintic.In)
+    .onComplete(function() {
+      camera.position.set(0, 5000, -1000);
+      camera.target = sun.position.clone();
+      camera.lookAt(camera.target);
+      scene.remove(boxScene);
+      scene.add(mainScene);
+      $('#navigation').load("content/navigation.html", function () {
+
+        $('.button').click(function(){
+         $('.button').removeClass('dark');
+          $(this).addClass('dark');
+        });
+        $('.button').hover(function(){
+          $(this).toggleClass('hover');
+        });
+      });
+    }).start();
 }
 
 
@@ -412,9 +421,5 @@ function onDocumentMouseWheel(event) {
       camera.position.y += event.wheelDelta;
       camera.lookAt(sun.position);
     }
-<<<<<<< HEAD
-  }
-}
-=======
-}
->>>>>>> origin/player2
+
+  }}

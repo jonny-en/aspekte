@@ -121,6 +121,8 @@ p {
     text-decoration: none;
 }
 
+
+
 .back {
     color: white;
     text-decoration: none;
@@ -129,7 +131,13 @@ p {
 
 .dark {
     background: rgba(47, 62, 106, 0.95);
+    border: 1px solid rgba(47, 62, 106, 1);
 }
+.hover {
+    background: rgba(47, 62, 106, 0.95);
+    border: 1px solid rgba(47, 62, 106, 1);
+}
+
 
 #information {
     border-radius: 4px;
