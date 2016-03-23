@@ -348,8 +348,8 @@ function marbleClicked() {
             camera.lookAt(camera.target);
             scene.remove(boxScene);
             scene.add(mainScene);
-            $('#navigation').load("content/navigation.html");
-        })
+            $('#navigation').load("content/navigation.html"
+        )
         .start();
 }
 
