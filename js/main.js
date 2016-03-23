@@ -176,6 +176,7 @@ function render() {
     TWEEN.update();
     var delta = 5 * clock.getDelta();
 
+    uniforms.time.value += 0.2 * delta;
 
     if (marbleIsClicked === false) {
         lon += 0.15;
@@ -183,7 +184,6 @@ function render() {
         phi = THREE.Math.degToRad(90 - lat);
         theta = THREE.Math.degToRad(lon);
 
-        uniforms.time.value += 0.2 * delta;
 
         camera.position.x = 100 * Math.sin(phi) * Math.cos(theta);
         camera.position.y = 100 * Math.cos(phi);
@@ -275,11 +275,16 @@ function flyToPlanet(planet, planetCenter) {
     THREE.SceneUtils.detach(camera, camera.parent, scene);
     var vector = new THREE.Vector3();
     vector.setFromMatrixPosition(planet.matrixWorld);
+    var nearFactor = 0.9999;
 
+    var distanceToSun = 0;
+    if (planet === sun) {
+        distanceToSun = 2.5;
+    }
     var tween = new TWEEN.Tween(camera.position).to({
-            x: vector.x * 0.9999,
-            y: vector.y * 0.9999,
-            z: vector.z * 0.9999
+            x: vector.x * nearFactor + distanceToSun,
+            y: vector.y * nearFactor,
+            z: vector.z * nearFactor
         }, 7000)
         .easing(TWEEN.Easing.Quintic.InOut)
         .onComplete(function() {

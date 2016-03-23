@@ -37,12 +37,12 @@ function initSun() {
         map: textureLoader.load("textures/lava/glow.png"),
         color: 0xFFDB99,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.9,
         blending: THREE.AdditiveBlending
     });
     var sunGlow = new THREE.Sprite(material);
     var sunBigGlow = new THREE.Sprite(material);
-    sunGlow.scale.set(0.8,0.8,0.8);
+    sunGlow.scale.set(3,3,3);
     sunBigGlow.scale.set(100,100,100);
     sun.add(sunGlow);
 
