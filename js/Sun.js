@@ -42,7 +42,7 @@ function initSun() {
     });
     var sunGlow = new THREE.Sprite(material);
     var sunBigGlow = new THREE.Sprite(material);
-    sunGlow.scale.set(0.8,0.8,0.8);
+    sunGlow.scale.set(2,2,2);
     sunBigGlow.scale.set(100,100,100);
     sun.add(sunGlow);
 
