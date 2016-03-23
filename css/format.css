@@ -133,6 +133,11 @@ p {
     background: rgba(47, 62, 106, 0.95);
     border: 1px solid rgba(47, 62, 106, 1);
 }
+
+.dark2 {
+    background: rgba(47, 62, 106, 0.95);
+    border: 1px solid rgba(47, 62, 106, 1);
+}
 .hover {
     background: rgba(47, 62, 106, 0.95);
     border: 1px solid rgba(47, 62, 106, 1);
