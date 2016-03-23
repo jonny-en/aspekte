@@ -260,7 +260,7 @@ function removeGlow(planetBigSphere, bigGlow) {
     planetBigSphere.remove(bigGlow);
 }
 
-function flyToPlanet(planet, planetCenter) {
+function flyToPlanet(planet, planetCenter, infoSrc) {
     turnsky = false;
     planets_moving = false;
     removeBigPlanets();
@@ -284,7 +284,7 @@ function flyToPlanet(planet, planetCenter) {
         .easing(TWEEN.Easing.Quintic.InOut)
         .onComplete(function() {
             THREE.SceneUtils.attach(camera, scene, planetCenter);
-            $('#information_container').load('content/mars.html');
+            $('#information_container').load(infoSrc);
             turnsky = true;
         }).onUpdate(function() {
             camera.lookAt(camera.target);
