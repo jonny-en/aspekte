@@ -308,7 +308,16 @@ function flyToPlanet(planet, planetCenter, infoSrc) {
         }).start();
 }
 
-
+function flyToTopView() {
+    THREE.SceneUtils.detach(camera, camera.parent, scene);
+    camera.position.set(0, 1000, -1000);
+    camera.target = sun.position.clone();
+    camera.lookAt(camera.target);
+    addBigPlanets();
+    planets_moving = true;
+    turnsky = false;
+    topview_active = true;
+}
 
 function onDocumentTouchStart(event) {
     event.preventDefault();
@@ -342,15 +351,13 @@ function marbleClicked() {
         }, 1000)
         .easing(TWEEN.Easing.Quintic.In)
         .onComplete(function() {
-
             camera.position.set(0, 5000, -1000);
             camera.target = sun.position.clone();
             camera.lookAt(camera.target);
             scene.remove(boxScene);
             scene.add(mainScene);
-            $('#navigation').load("content/navigation.html"
-        )
-        .start();
+            $('#navigation').load("content/navigation.html");
+        }).start();
 }
 
 
