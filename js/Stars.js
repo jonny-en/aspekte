@@ -1,4 +1,4 @@
-
+var stars, stars2, stars3;
  function initStars() {
      var loader = new THREE.TextureLoader();
      var starTexture = loader.load('textures/starmap.png');

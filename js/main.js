@@ -6,7 +6,7 @@ var scene, mainScene, boxScene, renderer, composer;
 var marble, innerMarble, marbleIsClicked = false;
 
 var raycaster;
-
+var topview_active = true;
 var mouse;
 var lat = 0,
     phi = 0,
@@ -15,10 +15,12 @@ var lat = 0,
 var width = window.innerWidth || 2;
 var height = window.innerHeight || 2;
 
+var oldPlanet;
+
 var windowHalfX = width / 2;
 var windowHalfY = height / 2;
 
-var speedFactor = 1;
+var speedFactor = 0.8;
 var sizeFactor = 1;
 
 //Access with planet_parameters.[mercury].size
@@ -35,6 +37,7 @@ var planet_parameters = {
 };
 
 var planets_moving = true;
+var turnsky;
 
 init();
 
@@ -81,11 +84,12 @@ function init() {
     initSaturn();
     initUranus();
     initNeptune();
-
+    oldPlanet = sun;
     camera.position.set(0, 0, 0);
 
     camera.target = sun.position.clone();
-
+    camera.arschloch = earth.position.clone();
+    console.log(camera.arschloch);
     //Init Renderpasses
     var renderModel = new THREE.RenderPass(scene, camera);
     var effectBloom = new THREE.BloomPass(0.3, 25, 20, 256);
@@ -194,7 +198,7 @@ function render() {
     }
     //PlanetRotations
     sun.rotation.y += 0.025 * delta;
-    mars.rotation.y += 0.01 * delta;
+    mars.rotation.y -= 0.02 * delta;
 
     if (planets_moving) {
         earthCenter.rotation.y -= 0.107 * speedFactor * delta;
@@ -206,13 +210,18 @@ function render() {
         uranusCenter.rotation.y -= 0.024 * speedFactor * delta;
         neptuneCenter.rotation.y -= 0.019 * speedFactor * delta;
     }
+    if (turnsky) {
+        stars.rotation.y -= 0.001 * delta;
+        stars2.rotation.y += 0.0009 * delta;
+        stars3.rotation.z += 0.0011 * delta;
+    }
 
 
     //CameraPosition via mouse position
     // camera.lookAt(camera.target);
     camera.updateProjectionMatrix();
     renderer.clear();
-    composer.render(0.01);
+    composer.render(0.001);
 }
 
 function removeBigPlanets() {
@@ -252,16 +261,20 @@ function removeGlow(planetBigSphere, bigGlow) {
 }
 
 function flyToPlanet(planet, planetCenter) {
-
+    turnsky = false;
     planets_moving = false;
     removeBigPlanets();
+    if (topview_active === true) {
+        THREE.SceneUtils.attach(camera, scene, sun);
+    }
+    topview_active = false;
     planetCenter.updateMatrixWorld();
     mainScene.updateMatrixWorld();
     planet.updateMatrixWorld();
+    camera.parent.updateMatrixWorld();
+    THREE.SceneUtils.detach(camera, camera.parent, scene);
     var vector = new THREE.Vector3();
     vector.setFromMatrixPosition(planet.matrixWorld);
-
-
 
     var tween = new TWEEN.Tween(camera.position).to({
             x: vector.x * 0.9999,
@@ -271,33 +284,24 @@ function flyToPlanet(planet, planetCenter) {
         .easing(TWEEN.Easing.Quintic.InOut)
         .onComplete(function() {
             THREE.SceneUtils.attach(camera, scene, planetCenter);
-
             $('#information_container').load('content/mars.html');
-            planets_moving = true;
-            console.log(camera.rotation);
-        })
-        .onUpdate(function() {
+            turnsky = true;
+        }).onUpdate(function() {
             camera.lookAt(camera.target);
-        })
-        .onStart(function(){
-               THREE.SceneUtils.detach(camera, planetCenter, scene);
         }).start();
 
     var tweenTarget = new TWEEN.Tween(camera.target).to({
             x: vector.x,
             y: vector.y,
             z: vector.z
-        }, 6000)
+        }, 3000)
         .easing(TWEEN.Easing.Quintic.InOut)
         .onUpdate(function() {
             camera.lookAt(camera.target);
         }).start();
-
-
-
-
-    console.log(vector);
 }
+
+
 
 function onDocumentTouchStart(event) {
     event.preventDefault();
@@ -350,10 +354,11 @@ function onDocumentMouseMove(event) {
 }
 
 function onDocumentMouseWheel(event) {
-
-    event = window.event || event;
-    if ((event.wheelDelta < 0 && camera.position.z > 800 && event.wheelDelta + camera.position.z > 800) || (event.wheelDelta > 0 && camera.position.z < 10000 && event.wheelDelta + camera.position.z < 10000)) {
-        camera.position.z += event.wheelDelta;
+    if (topview_active === true) {
+        event = window.event || event;
+        if ((event.wheelDelta < 0 && camera.position.y > 800 && event.wheelDelta + camera.position.y > 800) || (event.wheelDelta > 0 && camera.position.y < 10000 && event.wheelDelta + camera.position.y < 10000)) {
+            camera.position.y += event.wheelDelta;
+            camera.lookAt(sun.position);
+        }
     }
-
 }
