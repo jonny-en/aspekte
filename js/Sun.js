@@ -18,7 +18,7 @@ function initSun() {
     uniforms.texture1.value.wrapS = uniforms.texture1.value.wrapT = THREE.RepeatWrapping;
     uniforms.texture2.value.wrapS = uniforms.texture2.value.wrapT = THREE.RepeatWrapping;
 
-    var size = 1.56342;
+    var size = 0.69342;
 
     material = new THREE.ShaderMaterial({
 
