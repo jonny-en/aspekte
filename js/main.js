@@ -322,12 +322,13 @@ function onDocumentMouseDown(event) {
 
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    raycaster.setFromCamera(mouse, camera);
-    var intersects = raycaster.intersectObjects([marble], true);
-    if (intersects.length > 0) {
-        console.log("hellooo");
-        marbleClicked();
+    if (marbleIsClicked === false) {
+        raycaster.setFromCamera(mouse, camera);
+        var intersects = raycaster.intersectObjects([marble], true);
+        if (intersects.length > 0) {
+            console.log("hellooo");
+            marbleClicked();
+        }
     }
 }
 
