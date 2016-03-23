@@ -122,17 +122,6 @@ p {
 }
 
 
-.button.dark {
-    background: rgba(47, 62, 106, 0.8);
-    border: 1px solid rgb(47, 62, 106);
-}
-
-.back {
-    color: white;
-    text-decoration: none;
-    font-family: 'Droid Serif', sans-serif;
-}
-
 
 #information {
     border-radius: 4px;

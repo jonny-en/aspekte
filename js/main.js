@@ -250,7 +250,6 @@ function addBigPlanets() {
     saturn.add(saturnBigSphere);
     uranus.add(uranusBigSphere);
     neptune.add(neptuneBigSphere);
-    sun.add(sunBigSphere);
 }
 
 function addGlow(planetBigSphere, bigGlow) {
@@ -309,16 +308,7 @@ function flyToPlanet(planet, planetCenter, infoSrc) {
         }).start();
 }
 
-function flyToTopView() {
-    THREE.SceneUtils.detach(camera, camera.parent, scene);
-    camera.position.set(0, 1000, -1000);
-    camera.target = sun.position.clone();
-    camera.lookAt(camera.target);
-    addBigPlanets();
-    planets_moving = true;
-    turnsky = false;
-    topview_active = true;
-}
+
 
 function onDocumentTouchStart(event) {
     event.preventDefault();
@@ -353,7 +343,7 @@ function marbleClicked() {
         .easing(TWEEN.Easing.Quintic.In)
         .onComplete(function() {
 
-            camera.position.set(0, 1000, -1000);
+            camera.position.set(0, 5000, -1000);
             camera.target = sun.position.clone();
             camera.lookAt(camera.target);
             scene.remove(boxScene);
@@ -374,7 +364,7 @@ function onDocumentMouseMove(event) {
 function onDocumentMouseWheel(event) {
     if (topview_active === true) {
         event = window.event || event;
-        if ((event.wheelDelta < 0 && camera.position.y > 600 && event.wheelDelta + camera.position.y > 600) || (event.wheelDelta > 0 && camera.position.y < 10000 && event.wheelDelta + camera.position.y < 10000)) {
+        if ((event.wheelDelta < 0 && camera.position.y > 800 && event.wheelDelta + camera.position.y > 800) || (event.wheelDelta > 0 && camera.position.y < 10000 && event.wheelDelta + camera.position.y < 10000)) {
             camera.position.y += event.wheelDelta;
             camera.lookAt(sun.position);
         }
