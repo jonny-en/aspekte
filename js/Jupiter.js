@@ -12,7 +12,7 @@ function initJupiter() {
     mainScene.add(jupiterCenter);
 
     //Mars
-     geometry = new THREE.SphereGeometry(size, 22, 22);
+     geometry = new THREE.SphereGeometry(size, 60, 60);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/jupiter/diff.jpg');

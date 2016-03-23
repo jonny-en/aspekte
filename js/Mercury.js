@@ -12,7 +12,7 @@ function initMercury() {
     mainScene.add(mercuryCenter);
 
     //Mercury
-     geometry = new THREE.SphereGeometry(size, 22, 22);
+     geometry = new THREE.SphereGeometry(size, 60, 60);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/mercury/diff.jpg');

@@ -18,7 +18,7 @@ function initSun() {
     uniforms.texture1.value.wrapS = uniforms.texture1.value.wrapT = THREE.RepeatWrapping;
     uniforms.texture2.value.wrapS = uniforms.texture2.value.wrapT = THREE.RepeatWrapping;
 
-    var size = 0.696342;
+    var size = 1.56342;
 
     material = new THREE.ShaderMaterial({
 
@@ -28,7 +28,7 @@ function initSun() {
 
     });
 
-    sun = new THREE.Mesh(new THREE.SphereGeometry(size, 30, 30), material);
+    sun = new THREE.Mesh(new THREE.SphereGeometry(size, 60, 60), material);
     mainScene.add(sun);
 
 

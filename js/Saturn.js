@@ -12,7 +12,7 @@ function initSaturn() {
     mainScene.add(saturnCenter);
 
     //Saturn
-    geometry = new THREE.SphereGeometry(size, 32, 32);
+    geometry = new THREE.SphereGeometry(size, 60, 60);
     var loader = new THREE.TextureLoader();
 
     var saturnMap = loader.load('textures/saturn/saturnmap.jpg');

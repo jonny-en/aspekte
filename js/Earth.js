@@ -12,7 +12,7 @@ function initEarth() {
     mainScene.add(earthCenter);
 
     //Earth
-     geometry = new THREE.SphereGeometry(size, 22, 22);
+     geometry = new THREE.SphereGeometry(size, 60, 60);
     var loader = new THREE.TextureLoader();
 
     var diffuse = loader.load('textures/earth/diff.jpg');
@@ -30,7 +30,7 @@ function initEarth() {
     earthCenter.add(earth);
 
     //Clouds
-     geometry = new THREE.SphereGeometry(size + 0.0001, 22, 22);
+     geometry = new THREE.SphereGeometry(size + 0.0001, 60, 60);
     var clouds = loader.load('textures/earth/cloud.png');
      material = new THREE.MeshPhongMaterial({
         map: clouds,

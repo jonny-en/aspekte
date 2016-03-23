@@ -26,14 +26,14 @@ var sizeFactor = 1;
 //Access with planet_parameters.[mercury].size
 var planet_parameters = {
 
-    mercury: { size: 0.006367, distance: 58 },
-    venus: { size: 0.006367, distance: 108 },
-    earth: { size: 0.006367, distance: 150 },
+    mercury: { size: 0.0014367, distance: 58 },
+    venus: { size: 0.0036367, distance: 108 },
+    earth: { size: 0.0052367, distance: 150 },
     mars: { size: 0.006367, distance: 228 },
-    jupiter: { size: 0.006367, distance: 778 },
-    saturn: { size: 0.006367, distance: 1433 },
-    uranus: { size: 0.006367, distance: 2872 },
-    neptune: { size: 0.006367, distance: 4495 },
+    jupiter: { size: 0.039367, distance: 778 },
+    saturn: { size: 0.066367, distance: 1433 },
+    uranus: { size: 0.116367, distance: 2872 },
+    neptune: { size: 0.166367, distance: 4495 },
 };
 
 var planets_moving = true;
@@ -261,6 +261,7 @@ function removeGlow(planetBigSphere, bigGlow) {
 }
 
 function flyToPlanet(planet, planetCenter, infoSrc) {
+    $('#information_container').fadeOut('slow');
     turnsky = false;
     planets_moving = false;
     removeBigPlanets();
@@ -289,7 +290,8 @@ function flyToPlanet(planet, planetCenter, infoSrc) {
         .easing(TWEEN.Easing.Quintic.InOut)
         .onComplete(function() {
             THREE.SceneUtils.attach(camera, scene, planetCenter);
-            $('#information_container').load(infoSrc);
+            $('#information_container').fadeIn('slow').load(infoSrc);
+
             turnsky = true;
         }).onUpdate(function() {
             camera.lookAt(camera.target);
