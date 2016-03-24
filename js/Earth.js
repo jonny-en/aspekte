@@ -23,14 +23,15 @@ function initEarth() {
         map: diffuse,
         bumpMap: bump,
         bumpScale: size/100,
-        specularMap: spec
+        specularMap: spec,
+        shininess: 50
     });
     earth = new THREE.Mesh(geometry, material);
     earth.position.set(distance, 0, 0);
     earthCenter.add(earth);
 
     //Clouds
-     geometry = new THREE.SphereGeometry(size + 0.0001, 60, 60);
+     geometry = new THREE.SphereGeometry(size + 0.00005, 60, 60);
     var clouds = loader.load('textures/earth/cloud.png');
      material = new THREE.MeshPhongMaterial({
         map: clouds,

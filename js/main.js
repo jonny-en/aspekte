@@ -235,7 +235,17 @@ function render() {
     }
     //PlanetRotations
     sun.rotation.y += 0.025 * delta;
+    mercury.rotation.y -= 0.02 * delta;
+    venus.rotation.y -= 0.02 * delta;
+    earth.rotation.y -= 0.02 * delta;
+    earthClouds.rotation.y -= 0.005 * delta;
+    earthClouds.rotation.x += 0.003 * delta;
     mars.rotation.y -= 0.02 * delta;
+    jupiter.rotation.y -= 0.02 * delta;
+    saturn.rotation.y -= 0.02 * delta;
+    uranus.rotation.y -= 0.02 * delta;
+    neptune.rotation.y -= 0.02 * delta;
+
 
     if (planets_moving) {
         earthCenter.rotation.y -= 0.107 * speedFactor * delta;
@@ -287,6 +297,7 @@ function addBigPlanets() {
     saturn.add(saturnBigSphere);
     uranus.add(uranusBigSphere);
     neptune.add(neptuneBigSphere);
+    sun.add(saturnBigSphere);
 }
 
 function addGlow(planetBigSphere, bigGlow) {

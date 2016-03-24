@@ -33,7 +33,8 @@ function initMars() {
         color: 0xaf241f,
         transparent: true,
         opacity: 0.8,
-        blending: THREE.AdditiveBlending
+        blending: THREE.AdditiveBlending,
+        shininess: 1
     });
     marsBigGlow = new THREE.Sprite(material);
     marsBigGlow.scale.set(100,100,100);
