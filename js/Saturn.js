@@ -37,8 +37,10 @@ function initSaturn() {
         opacity: 0.8
     });
     saturnRing = new THREE.Mesh(ringGeometry, material);
-    saturnRing.rotation.x = Math.PI - 2.1;
-    saturnRing.rotation.y = Math.PI;
+    saturnRing.rotation.y = Math.PI/8 ;
+    saturnRing.rotation.x = Math.PI/4 ;
+    saturnRing.rotation.z = Math.PI/8 ;
+
     saturn.add(saturnRing);
 
     //Glow
