@@ -1,3 +1,8 @@
+window.onload = function() {
+    var backgroundAudio=document.getElementById("audio");
+    backgroundAudio.volume=0.3;
+};
+
 var container;
 var clock = new THREE.Clock();
 
@@ -47,7 +52,7 @@ var planet_parameters = {
         distance: 778
     },
     saturn: {
-        size: 0.066367,
+        size: 0.030367,
         distance: 1433
     },
     uranus: {

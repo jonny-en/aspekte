@@ -28,20 +28,53 @@ function initSaturn() {
     saturnCenter.add(saturn);
 
     //Saturn Ring
-    var ringGeometry = new THREE.RingGeometry(1.2 * size, 2 * size, 40, 3, 0, 2 * Math.PI);
+    var ringGeometry = new THREE.RingGeometry(1.8 * size, 2 * size, 40, 40, 0, 2 * Math.PI);
     var ringTexture = loader.load('textures/saturn/saturn-rings.png');
     material = new THREE.MeshBasicMaterial({
         map: ringTexture,
+        color: 0x6f6e58,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.9
+    });
+    saturnRing = new THREE.Mesh(ringGeometry, material);
+
+    saturnRing.rotation.x = Math.PI/2 ;
+    saturnRing.rotation.y = Math.PI/8 ;
+    saturnRing.position.set(distance,0.001,0);
+    saturnCenter.add(saturnRing);
+
+    //Saturn Ring2
+    var ringGeometry2 = new THREE.RingGeometry(1.4* size, 1.75 * size, 40,40, 0, 2 * Math.PI);
+    material = new THREE.MeshBasicMaterial({
+        color: 0x9c9280,
         side: THREE.DoubleSide,
         transparent: true,
         opacity: 0.8
     });
-    saturnRing = new THREE.Mesh(ringGeometry, material);
-    saturnRing.rotation.y = Math.PI/8 ;
-    saturnRing.rotation.x = Math.PI/4 ;
-    saturnRing.rotation.z = Math.PI/8 ;
+    saturnRing2 = new THREE.Mesh(ringGeometry2, material);
 
-    saturn.add(saturnRing);
+    saturnRing2.rotation.x = Math.PI/2 ;
+    saturnRing2.rotation.y = Math.PI/8 ;
+    saturnRing2.position.set(distance,0.002,0);
+    saturnCenter.add(saturnRing2);
+
+    //Saturn Ring 3
+    var ringGeometry3 = new THREE.RingGeometry(1.2 * size, 1.4 * size, 40, 40, 0, 2 * Math.PI);
+    var ringTexture3 = loader.load('textures/saturn/saturn-rings.png');
+    material = new THREE.MeshBasicMaterial({
+        map: ringTexture,
+        color: 0x6f6e58,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.4
+    });
+    saturnRing3 = new THREE.Mesh(ringGeometry3, material);
+
+    saturnRing3.rotation.x = Math.PI/2 ;
+    saturnRing3.rotation.y = Math.PI/8 ;
+    saturnRing3.position.set(distance,0.0021,0);
+    saturnCenter.add(saturnRing3);
 
     //Glow
        material = new THREE.SpriteMaterial({
