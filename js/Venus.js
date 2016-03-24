@@ -37,7 +37,7 @@ function initVenus() {
         blending: THREE.AdditiveBlending
     });
      venusBigGlow = new THREE.Sprite(material);
-    venusBigGlow.scale.set(100,100,100);
+    venusBigGlow.scale.set(200,200,200);
 
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);

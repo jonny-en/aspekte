@@ -28,10 +28,8 @@ function initSaturn() {
     saturnCenter.add(saturn);
 
     //Saturn Ring
-    var ringGeometry = new THREE.RingGeometry(1.8 * size, 2 * size, 40, 40, 0, 2 * Math.PI);
-    var ringTexture = loader.load('textures/saturn/saturn-rings.png');
+    var ringGeometry = new THREE.RingGeometry(1.8 * size, 2 * size, 60, 60, 0, 2 * Math.PI);
     material = new THREE.MeshBasicMaterial({
-        map: ringTexture,
         color: 0x6f6e58,
         side: THREE.DoubleSide,
         transparent: true,
@@ -45,7 +43,7 @@ function initSaturn() {
     saturnCenter.add(saturnRing);
 
     //Saturn Ring2
-    var ringGeometry2 = new THREE.RingGeometry(1.4* size, 1.75 * size, 40,40, 0, 2 * Math.PI);
+    var ringGeometry2 = new THREE.RingGeometry(1.4* size, 1.75 * size, 60,60, 0, 2 * Math.PI);
     material = new THREE.MeshBasicMaterial({
         color: 0x9c9280,
         side: THREE.DoubleSide,
@@ -60,10 +58,9 @@ function initSaturn() {
     saturnCenter.add(saturnRing2);
 
     //Saturn Ring 3
-    var ringGeometry3 = new THREE.RingGeometry(1.2 * size, 1.4 * size, 40, 40, 0, 2 * Math.PI);
-    var ringTexture3 = loader.load('textures/saturn/saturn-rings.png');
+    var ringGeometry3 = new THREE.RingGeometry(1.2 * size, 1.4 * size, 60, 60, 0, 2 * Math.PI);
+
     material = new THREE.MeshBasicMaterial({
-        map: ringTexture,
         color: 0x6f6e58,
         side: THREE.DoubleSide,
         transparent: true,
@@ -85,7 +82,7 @@ function initSaturn() {
         blending: THREE.AdditiveBlending
     });
   saturnBigGlow = new THREE.Sprite(material);
-    saturnBigGlow.scale.set(100,100,100);
+    saturnBigGlow.scale.set(200,200,200);
 
     //Big sphere
     var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);

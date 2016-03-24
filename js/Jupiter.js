@@ -36,7 +36,7 @@ function initJupiter() {
         blending: THREE.AdditiveBlending
     });
      jupiterBigGlow = new THREE.Sprite(material);
-    jupiterBigGlow.scale.set(100,100,100);
+    jupiterBigGlow.scale.set(200,200,200);
 
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);

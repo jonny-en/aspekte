@@ -37,7 +37,7 @@ function initMars() {
         shininess: 1
     });
     marsBigGlow = new THREE.Sprite(material);
-    marsBigGlow.scale.set(100,100,100);
+    marsBigGlow.scale.set(200,200,200);
 
     //Big sphere
     var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);

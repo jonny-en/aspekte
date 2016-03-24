@@ -49,7 +49,7 @@ function initEarth() {
         blending: THREE.AdditiveBlending
     });
   earthBigGlow = new THREE.Sprite(material);
-    earthBigGlow.scale.set(100,100,100);
+    earthBigGlow.scale.set(200,200,200);
 
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);

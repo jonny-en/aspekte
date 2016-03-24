@@ -37,7 +37,7 @@ function initNeptune() {
         blending: THREE.AdditiveBlending
     });
     neptuneBigGlow = new THREE.Sprite(material);
-    neptuneBigGlow.scale.set(100,100,100);
+    neptuneBigGlow.scale.set(200,200,200);
 
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(15, 30, 30);

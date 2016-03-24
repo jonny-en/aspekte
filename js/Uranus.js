@@ -36,7 +36,7 @@ function initUranus() {
         blending: THREE.AdditiveBlending
     });
     uranusBigGlow = new THREE.Sprite(material);
-    uranusBigGlow.scale.set(100,100,100);
+    uranusBigGlow.scale.set(200,200,200);
 
     //Big sphere
      var bigSphereGeometry = new THREE.SphereGeometry(15, 22, 22);

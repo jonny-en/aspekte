@@ -43,7 +43,7 @@ function initSun() {
     var sunGlow = new THREE.Sprite(material);
     var sunBigGlow = new THREE.Sprite(material);
     sunGlow.scale.set(3,3,3);
-    sunBigGlow.scale.set(100,100,100);
+    sunBigGlow.scale.set(200,200,200);
     sun.add(sunGlow);
 
     //Big sphere

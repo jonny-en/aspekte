@@ -36,7 +36,7 @@ function initMercury() {
         blending: THREE.AdditiveBlending
     });
     mercuryBigGlow = new THREE.Sprite(material);
-    mercuryBigGlow.scale.set(100,100,100);
+    mercuryBigGlow.scale.set(200,200,200);
 
 
 

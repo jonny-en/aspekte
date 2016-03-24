@@ -9,6 +9,9 @@ body {
     overflow: hidden;
 }
 
+#hinweis{
+  text-align: center;
+}
 #content {
     position: absolute;
     width: 100%;
