@@ -347,7 +347,7 @@ function flyToPlanet(planet, planetCenter, infoSrc, id) {
             .easing(TWEEN.Easing.Quintic.InOut)
             .onComplete(function() {
                 THREE.SceneUtils.attach(camera, scene, planetCenter);
-                $('#information_container').fadeIn('slow').load(infoSrc);
+                $('#information_container').load(infoSrc).fadeIn('slow');
 
                 turnsky = true;
                 fly_active = false;
@@ -368,14 +368,15 @@ function flyToPlanet(planet, planetCenter, infoSrc, id) {
 }
 
 function flyToTopView() {
-    THREE.SceneUtils.detach(camera, camera.parent, scene);
+  if(!fly_active)
+    {THREE.SceneUtils.detach(camera, camera.parent, scene);
     camera.position.set(0, 1000, -1000);
     camera.target = sun.position.clone();
     camera.lookAt(camera.target);
     addBigPlanets();
     planets_moving = true;
     turnsky = false;
-    topview_active = true;
+    topview_active = true;}
 }
 
 function onDocumentTouchStart(event) {
@@ -401,7 +402,7 @@ function onDocumentMouseDown(event) {
 }
 
 function marbleClicked() {
-
+    $('#hinweis').hide();
     marbleIsClicked = true;
     $("#pcontainer").empty();
     var tween = new TWEEN.Tween(camera.position).to({
